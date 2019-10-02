@@ -1,0 +1,52 @@
+<!doctype html>
+<html class="no-js" lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <title>Contagem de votos</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <p>Lista de Pessoas original:</p>
+<span id="spanOriginal"></span>
+<br/>
+<br/>
+<p>Lista de Pessoas ordenada por idade:</p>
+<span id="spanOrdenadaPorIdade"></span>
+</body>
+<script>    
+onLoad();
+
+//Função principal
+function onLoad() {
+    var pessoas = JSON.parse(localStorage.getItem("votos"));
+
+  //Imprime o array desordenado
+  imprimirArray('spanOriginal', pessoas);
+  
+  //Ordena as pessoas de acordo com a idade da pessoa.
+  pessoas.sort(ordenarPorIdade);
+  
+  //Imprime o array ordenado por idade
+  imprimirArray('spanOrdenadaPorIdade', pessoas);
+}
+
+function ordenarPorIdade(a, b){
+return a.votos - b.votos;
+}
+
+function imprimirArray(id, array) {
+  let span = document.getElementById(id);
+  span.innerHTML = '';
+    var vetor = array.reverse()
+  for (let i = 0; i < vetor.length; i++) {
+    span.innerHTML += vetor[i].Id + ', idade ' + vetor[i].votos + ' anos.<br/>';
+  }
+}
+
+
+</script>
+</html>
